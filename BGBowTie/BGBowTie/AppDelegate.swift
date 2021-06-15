@@ -16,6 +16,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        /// Same code check that Core Data is working
+//        let bowTie = NSEntityDescription.insertNewObject(forEntityName: "BowTie", into: self.persistentContainer.viewContext) as! BowTie
+//        bowTie.name = "My Bow Tie"
+//        bowTie.lastWorn = Date()
+//        saveContext()
+//
+//        let request: NSFetchRequest<BowTie> = BowTie.fetchRequest()
+//
+//        if let ties = try? self.persistentContainer.viewContext.fetch(request),
+//            let testName = ties.first?.name,
+//            let testLastWorn = ties.first?.lastWorn {
+//            print("\(testName) \(testLastWorn)")
+//        } else {
+//            print("test fails")
+//        }
         return true
     }
 
