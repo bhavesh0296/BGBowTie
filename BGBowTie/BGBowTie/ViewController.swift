@@ -24,6 +24,7 @@ class ViewController: UIViewController {
 
     //MARK:- Properties
     var managedContext: NSManagedObjectContext!
+    var currentBowTie: BowTie!
 
 
     // MARK: - View Life Cycle
@@ -36,10 +37,10 @@ class ViewController: UIViewController {
         let request: NSFetchRequest<BowTie> = BowTie.fetchRequest()
         let firstTitle = segmentedControl.titleForSegment(at: 0)!
         request.predicate = NSPredicate(format: "%K = %@",argumentArray: [#keyPath(BowTie.searchKey), firstTitle])
-        
+
         do {
             let results = try managedContext.fetch(request)
-
+            self.currentBowTie = results.first
             populate(bowTie: results.first)
 
         } catch {
@@ -55,11 +56,51 @@ class ViewController: UIViewController {
     }
 
     @IBAction func wear(_ sender: UIButton) {
+        let times = currentBowTie.timesWorn
+        currentBowTie.timesWorn = times + 1
+        currentBowTie.lastWorn = Date()
 
+        do {
+            try managedContext.save()
+            populate(bowTie: currentBowTie)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
     @IBAction func rate(_ sender: UIButton) {
+        let alert = UIAlertController(title: "New Rating", message: "Rate this BowTie", preferredStyle: .alert)
 
+        alert.addTextField { (textField) in
+            textField.keyboardType = .decimalPad
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let saveAction = UIAlertAction(title: "Save", style: .default) { (action) in
+
+            if let textField = alert.textFields?.first {
+                self.update(rating: textField.text)
+            }
+        }
+
+        alert.addAction(cancelAction)
+        alert.addAction(saveAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+
+    fileprivate func update(rating: String?) {
+        guard let rating = rating,
+            let ratingValue = Double(rating) else {
+                return
+        }
+
+        do {
+            currentBowTie.rating = ratingValue
+            try managedContext.save()
+            self.populate(bowTie: currentBowTie)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
     // Insert BowTie Dummy Data
@@ -128,6 +169,7 @@ class ViewController: UIViewController {
             lastWornLabel.text = "Last worn: \(dateFormatter.string(from: lastWorn))"
             favoriteLabel.isHidden = !bowTie.isFavorite
             view.tintColor = tintColor
+            segmentedControl.backgroundColor = tintColor
         }
     }
 

@@ -30,6 +30,7 @@
                                     <segment title="I"/>
                                     <segment title="V"/>
                                 </segments>
+                                <color key="tintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <connections>
                                     <action selector="segmentedControl:" destination="UtP-3w-3xV" eventType="valueChanged" id="Q5U-js-Q0g"/>
                                 </connections>
