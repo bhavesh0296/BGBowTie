@@ -53,6 +53,23 @@ class ViewController: UIViewController {
 
     @IBAction func segmentedControl(_ sender: UISegmentedControl) {
 
+        guard let selectedValue = sender.titleForSegment(at: sender.selectedSegmentIndex)  else {
+            return
+        }
+
+        let request: NSFetchRequest<BowTie> = BowTie.fetchRequest()
+        request.predicate = NSPredicate(format: "%K=%@", argumentArray: [#keyPath(BowTie.searchKey), selectedValue])
+
+        do {
+            let result = try managedContext.fetch(request)
+            if let bowTie = result.first{
+                currentBowTie = bowTie
+                self.populate(bowTie: currentBowTie)
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+
     }
 
     @IBAction func wear(_ sender: UIButton) {
@@ -98,8 +115,11 @@ class ViewController: UIViewController {
             currentBowTie.rating = ratingValue
             try managedContext.save()
             self.populate(bowTie: currentBowTie)
-        } catch {
-            print(error.localizedDescription)
+        } catch let error as NSError {
+            if error.domain == NSCocoaErrorDomain && (error.code == NSValidationNumberTooLargeError || error.code == NSValidationNumberTooSmallError) {
+//                rate(currentBowTie)
+            } else {
+                print("Could not save \(error), \(error.userInfo)") }
         }
     }
 
