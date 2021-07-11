@@ -1,12 +1,12 @@
 # BGBowTie ![BowTie](https://github.com/bhavesh0296/BGBowTie/blob/ebe833587b94a9e2af6efcd27d2d9e98c62a18ff/Screenshot/Bowtie.png)
 
-**A App for managing for your all BowTie into your wardrobe, It used *Core Data* to manage its Functionality**
+**A App for managing for your all BowTie into your wardrobe, It used *Core Data* to manage functionality**
 
-### App Contains Features:
- - It shows details of Bow Tie with BowTie name, rating, times worn, Last worn
- - Rating let you decide Did this BowTie Suitable for you
- - Times worn let you know how many times you wear this BowTie
- - Last worn tell you did you worn this BowTie recently
+### Features:
+ - Shows details of BowTie (i.e. BowTie name, Rating, times worn, Last worn)
+ - Rating tells is this BowTie Suitable
+ - Times worn tells how many times this BowTie worn
+ - Last worn tells is this BowTie worn recently
  
 <kbd>
 <img src="https://github.com/bhavesh0296/BGBowTie/blob/e1f69d7b0626a7bc625a9c5660140e612eb31ce0/Screenshot/homeBowTie.png" alt="Home" width="250" /> 
