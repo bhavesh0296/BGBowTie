@@ -9,6 +9,10 @@
  - Last worn tells is this BowTie worn recently
  
 <kbd>
+<img src="Screenshot/BGBowTie.gif" alt="Home" width="300" />
+</kbd>
+ &nbsp; &nbsp; &nbsp; &nbsp;
+<kbd>
 <img src="https://github.com/bhavesh0296/BGBowTie/blob/e1f69d7b0626a7bc625a9c5660140e612eb31ce0/Screenshot/homeBowTie.png" alt="Home" width="250" /> 
 </kbd>
   &nbsp; &nbsp; &nbsp; &nbsp;
